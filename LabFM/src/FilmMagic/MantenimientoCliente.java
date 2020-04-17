@@ -8,6 +8,10 @@ package FilmMagic;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -53,6 +57,9 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_buscar = new javax.swing.JTextField();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setVisible(true);
 
         registro.setText("REGISTRO");
@@ -63,10 +70,25 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
         });
 
         eliminar.setText("ELIMINAR");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         modificar.setText("MODIFICAR");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
 
         buscar.setText("BUSCAR");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Codigo:");
 
@@ -229,6 +251,80 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_registroActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+    //Codigo que permite borrar registros en la base de datos
+        try {
+             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
+            PreparedStatement pst = cn.prepareStatement("delete from clientes where CodigoCliente = ?");
+            
+            pst.setString(1, txt_buscar.getText().trim());
+            pst.executeUpdate();
+            
+            txt_codigo.setText("");
+            txt_nombre.setText("");
+            txt_Dpi.setText("");
+            txt_Direccion.setText("");
+            txt_Telefono.setText("");
+            txt_CorreoE.setText("");
+            txt_Estatus.setText("");
+            label_status.setText("Registro eliminado.");
+            
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+    //Codigo que permite actualizar registros en la base de datos
+        try {
+            String ID = txt_buscar.getText().trim();
+            
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
+            PreparedStatement pst = cn.prepareStatement("update clientes set CodigoEstudiante = ?, NombreEstudiante = ?, DireccionEstudiante = ?, TelefonoEstudiante = ?, CorreoEstudiante = ?, EstatusEstudiante = ? where ID = " + ID);
+            
+            pst.setString(1, "0");
+            pst.setString(2, txt_codigo.getText().trim());
+            pst.setString(3, txt_nombre.getText().trim());
+            pst.setString(4, txt_Dpi.getText().trim());
+            pst.setString(5, txt_Direccion.getText().trim());
+            pst.setString(6, txt_Telefono.getText().trim());
+            pst.setString(7, txt_CorreoE.getText().trim());
+            pst.setString(8, txt_Estatus.getText().trim());
+            pst.executeUpdate();
+            
+            label_status.setText("Modificación exitosa.");
+            
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+    //Codigo que permite consultar registros en la base de datos
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
+            PreparedStatement pst = cn.prepareStatement("select * from clientes where ID = ?");
+            pst.setString(1, txt_buscar.getText().trim());
+            
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()){
+                txt_codigo.setText(rs.getString("CodigoEstudiante"));
+                txt_nombre.setText(rs.getString("NombreEstudiante"));
+                txt_Direccion.setText(rs.getString("DireccionEstudiante"));
+                txt_Telefono.setText(rs.getString("TelefonoEstudiante"));
+                txt_CorreoE.setText(rs.getString("CorreoEstudiante"));
+                txt_Estatus.setText(rs.getString("EstatusEstudiante"));
+            } else {
+                JOptionPane.showMessageDialog(null, "clientes no registrado.");
+            }
+            
+        }catch (Exception e){
+            
+        }
+        
+    }//GEN-LAST:event_buscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
