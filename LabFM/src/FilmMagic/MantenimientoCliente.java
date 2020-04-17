@@ -247,6 +247,9 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
             txt_CorreoE.setText("");
             txt_Estatus.setText("");
             label_status.setText("Registro exitoso.");
+            {
+                JOptionPane.showMessageDialog(null, "Cliente Registrado.");
+            }
         }catch (Exception e){
             
         }
@@ -269,7 +272,9 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
             txt_CorreoE.setText("");
             txt_Estatus.setText("");
             label_status.setText("Registro eliminado.");
-            
+            {
+                JOptionPane.showMessageDialog(null, "Se Elimino Registro del Cliente.");
+            }
         } catch (Exception e) {
         }
         
@@ -281,20 +286,22 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
             String ID = txt_buscar.getText().trim();
             
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("update clientes set CodigoEstudiante = ?, NombreEstudiante = ?, DireccionEstudiante = ?, TelefonoEstudiante = ?, CorreoEstudiante = ?, EstatusEstudiante = ? where ID = " + ID);
+            PreparedStatement pst = cn.prepareStatement("update clientes set CodigoCliente = ?, NombreCliente = ?, DpiCliente = ?, DireccionCliente = ?, TelefonoCliente = ?, CorreoCliente = ?, EstatusCliente = ? where ID = " + ID);
             
             pst.setString(1, "0");
-            pst.setString(2, txt_codigo.getText().trim());
-            pst.setString(3, txt_nombre.getText().trim());
-            pst.setString(4, txt_Dpi.getText().trim());
-            pst.setString(5, txt_Direccion.getText().trim());
-            pst.setString(6, txt_Telefono.getText().trim());
-            pst.setString(7, txt_CorreoE.getText().trim());
-            pst.setString(8, txt_Estatus.getText().trim());
+            pst.setString(1, txt_codigo.getText().trim());
+            pst.setString(2, txt_nombre.getText().trim());
+            pst.setString(3, txt_Dpi.getText().trim());
+            pst.setString(4, txt_Direccion.getText().trim());
+            pst.setString(5, txt_Telefono.getText().trim());
+            pst.setString(6, txt_CorreoE.getText().trim());
+            pst.setString(7, txt_Estatus.getText().trim());
             pst.executeUpdate();
             
             label_status.setText("Modificación exitosa.");
-            
+            {
+                JOptionPane.showMessageDialog(null, "se a modificado el registro del cliente.");
+            }
         } catch (Exception e) {
         }
         
@@ -310,14 +317,15 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                txt_codigo.setText(rs.getString("CodigoEstudiante"));
-                txt_nombre.setText(rs.getString("NombreEstudiante"));
-                txt_Direccion.setText(rs.getString("DireccionEstudiante"));
-                txt_Telefono.setText(rs.getString("TelefonoEstudiante"));
-                txt_CorreoE.setText(rs.getString("CorreoEstudiante"));
-                txt_Estatus.setText(rs.getString("EstatusEstudiante"));
+                txt_codigo.setText(rs.getString("CodigoCliente"));
+                txt_nombre.setText(rs.getString("NombreCliente"));
+                txt_Dpi.setText(rs.getString("DpiCliente"));
+                txt_Direccion.setText(rs.getString("DireccionCliente"));
+                txt_Telefono.setText(rs.getString("TelefonoCliente"));
+                txt_CorreoE.setText(rs.getString("CorreoCliente"));
+                txt_Estatus.setText(rs.getString("EstatusCliente"));
             } else {
-                JOptionPane.showMessageDialog(null, "clientes no registrado.");
+                JOptionPane.showMessageDialog(null, "cliente no registrado.");
             }
             
         }catch (Exception e){
