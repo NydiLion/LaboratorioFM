@@ -5,8 +5,10 @@
  */
 package FilmMagic;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
-import java.sql.*;
 
 
 /**
@@ -206,16 +208,16 @@ public class MantenimientoCliente extends javax.swing.JInternalFrame {
 
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
     try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labFm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("insert into CLIENTES values(?,?,?,?,?,?,?,?,?)");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
+            PreparedStatement pst = cn.prepareStatement("insert into clientes values(?,?,?,?,?,?,?,?)");
             pst.setString(1, "0");
             pst.setString(2, txt_codigo.getText().trim());
             pst.setString(3, txt_nombre.getText().trim());
-            pst.setString(5, txt_Dpi.getText().trim());
-            pst.setString(6, txt_Direccion.getText().trim());
-            pst.setString(7, txt_Telefono.getText().trim());
-            pst.setString(8, txt_CorreoE.getText().trim());
-            pst.setString(9, txt_Estatus.getText().trim());
+            pst.setString(4, txt_Dpi.getText().trim());
+            pst.setString(5, txt_Direccion.getText().trim());
+            pst.setString(6, txt_Telefono.getText().trim());
+            pst.setString(7, txt_CorreoE.getText().trim());
+            pst.setString(8, txt_Estatus.getText().trim());
             pst.executeUpdate();
             txt_codigo.setText("");
             txt_nombre.setText("");
