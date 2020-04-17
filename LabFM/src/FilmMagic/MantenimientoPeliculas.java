@@ -213,7 +213,7 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("insert into clientes values(?,?,?,?,?,?,?)");
+            PreparedStatement pst = cn.prepareStatement("insert into peliculas values(?,?,?,?,?,?,?)");
             pst.setString(1, "0");
             pst.setString(2, txtCodigoP.getText().trim());
             pst.setString(3, txtNombreP.getText().trim());
@@ -229,6 +229,9 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
             txtExisP.setText("");
             txtEstatusP.setText("");
             label_status.setText("Registro exitoso.");
+            {
+                JOptionPane.showMessageDialog(null, "Pelicula Registrada Exitosamente.");
+            }
         }catch (Exception e){
 
         }
@@ -238,7 +241,7 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
         //Codigo que permite borrar registros en la base de datos
         try {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("delete from clientes where CodigoCliente = ?");
+            PreparedStatement pst = cn.prepareStatement("delete from peliculas where CodigoCliente = ?");
 
             pst.setString(1, txt_buscar.getText().trim());
             pst.executeUpdate();
@@ -250,7 +253,9 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
             txtExisP.setText("");
             txtEstatusP.setText("");
             label_status.setText("Registro eliminado.");
-
+            {
+                JOptionPane.showMessageDialog(null, "Pelicula Eliminada.");
+            }
         } catch (Exception e) {
         }
 
@@ -262,19 +267,21 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
             String ID = txt_buscar.getText().trim();
 
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("update clientes set CodigoEstudiante = ?, NombreEstudiante = ?, DireccionEstudiante = ?, TelefonoEstudiante = ?, CorreoEstudiante = ?, EstatusEstudiante = ? where ID = " + ID);
+            PreparedStatement pst = cn.prepareStatement("update peliculas set CodigoPelicula = ?, NombrePelicula = ?, AutorPelicula = ?, TipoPelicula = ?, ExistenciaPelicula = ?, EstatusPelicula = ? where ID = " + ID);
 
             pst.setString(1, "0");
-            pst.setString(2, txtCodigoP.getText().trim());
-            pst.setString(3, txtNombreP.getText().trim());
-            pst.setString(4, txtClasiP.getText().trim());
-            pst.setString(5, txtTipoP.getText().trim());
-            pst.setString(6, txtExisP.getText().trim());
-            pst.setString(7, txtEstatusP.getText().trim());
+            pst.setString(1, txtCodigoP.getText().trim());
+            pst.setString(2, txtNombreP.getText().trim());
+            pst.setString(3, txtClasiP.getText().trim());
+            pst.setString(4, txtTipoP.getText().trim());
+            pst.setString(5, txtExisP.getText().trim());
+            pst.setString(6, txtEstatusP.getText().trim());
             pst.executeUpdate();
 
             label_status.setText("Modificación exitosa.");
-
+            {
+                JOptionPane.showMessageDialog(null, "Pelicula Modificada.");
+            }
         } catch (Exception e) {
         }
 
@@ -284,20 +291,20 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
         //Codigo que permite consultar registros en la base de datos
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("select * from clientes where ID = ?");
+            PreparedStatement pst = cn.prepareStatement("select * from peliculas where ID = ?");
             pst.setString(1, txt_buscar.getText().trim());
 
             ResultSet rs = pst.executeQuery();
 
             if(rs.next()){
-                txtCodigoP.setText(rs.getString("CodigoEstudiante"));
-                txtNombreP.setText(rs.getString("NombreEstudiante"));
-                txtClasiP.setText(rs.getString("DireccionEstudiante"));
-                txtTipoP.setText(rs.getString("TelefonoEstudiante"));
-                txtExisP.setText(rs.getString("CorreoEstudiante"));
-                txtEstatusP.setText(rs.getString("EstatusEstudiante"));
+                txtCodigoP.setText(rs.getString("CodigoPelicula"));
+                txtNombreP.setText(rs.getString("NombrePelicula"));
+                txtClasiP.setText(rs.getString("AutorPelicula"));
+                txtTipoP.setText(rs.getString("TipoPelicula"));
+                txtExisP.setText(rs.getString("ExistenciaPelicula"));
+                txtEstatusP.setText(rs.getString("EstatusPelicula"));
             } else {
-                JOptionPane.showMessageDialog(null, "Pelicula no registrado.");
+                JOptionPane.showMessageDialog(null, "Pelicula no registrada.");
             }
 
         }catch (Exception e){
