@@ -222,12 +222,14 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
             pst.setString(6, txtExisP.getText().trim());
             pst.setString(7, txtEstatusP.getText().trim());
             pst.executeUpdate();
+            
             txtCodigoP.setText("");
             txtNombreP.setText("");
             txtClasiP.setText("");
             txtTipoP.setText("");
             txtExisP.setText("");
             txtEstatusP.setText("");
+            
             label_status.setText("Registro exitoso.");
             {
                 JOptionPane.showMessageDialog(null, "Pelicula Registrada Exitosamente.");
@@ -241,7 +243,7 @@ public class MantenimientoPeliculas extends javax.swing.JInternalFrame {
         //Codigo que permite borrar registros en la base de datos
         try {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("delete from peliculas where CodigoCliente = ?");
+            PreparedStatement pst = cn.prepareStatement("delete from peliculas where CodigoPelicula = ?");
 
             pst.setString(1, txt_buscar.getText().trim());
             pst.executeUpdate();
