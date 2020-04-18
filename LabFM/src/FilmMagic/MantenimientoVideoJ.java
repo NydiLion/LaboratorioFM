@@ -212,7 +212,7 @@ public class MantenimientoVideoJ extends javax.swing.JInternalFrame {
     private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("insert into clientes values(?,?,?,?,?,?,?)");
+            PreparedStatement pst = cn.prepareStatement("insert into videojuegos values(?,?,?,?,?,?,?)");
             pst.setString(1, "0");
             pst.setString(2, txtCodigoVJ.getText().trim());
             pst.setString(3, txtNombreVJ.getText().trim());
@@ -228,6 +228,9 @@ public class MantenimientoVideoJ extends javax.swing.JInternalFrame {
             txtExisVJ.setText("");
             txtEstatusVJ.setText("");
             label_status.setText("Registro exitoso.");
+            {
+                JOptionPane.showMessageDialog(null, "Registro Exitosamente VideoJuego.");
+            }
         }catch (Exception e){
 
         }
@@ -237,7 +240,7 @@ public class MantenimientoVideoJ extends javax.swing.JInternalFrame {
         //Codigo que permite borrar registros en la base de datos
         try {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("delete from clientes where CodigoCliente = ?");
+            PreparedStatement pst = cn.prepareStatement("delete from videojuegos where CodigoVideoJ = ?");
 
             pst.setString(1, txt_buscar.getText().trim());
             pst.executeUpdate();
@@ -249,7 +252,9 @@ public class MantenimientoVideoJ extends javax.swing.JInternalFrame {
             txtExisVJ.setText("");
             txtEstatusVJ.setText("");
             label_status.setText("Registro eliminado.");
-
+            {
+                JOptionPane.showMessageDialog(null, "VideoJuego Registro Eliminado.");
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_eliminarActionPerformed
@@ -260,19 +265,21 @@ public class MantenimientoVideoJ extends javax.swing.JInternalFrame {
             String ID = txt_buscar.getText().trim();
 
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("update clientes set CodigoEstudiante = ?, NombreEstudiante = ?, DireccionEstudiante = ?, TelefonoEstudiante = ?, CorreoEstudiante = ?, EstatusEstudiante = ? where ID = " + ID);
+            PreparedStatement pst = cn.prepareStatement("update videojuegos set CodigoVideoJ = ?, NombreVideoJ = ?, ConsolaVideoJ = ?, TipoVideoJ = ?, ExistenciaVideoJ = ?, EstatusVideoJ = ? where ID = " + ID);
 
             pst.setString(1, "0");
-            pst.setString(2, txtCodigoVJ.getText().trim());
-            pst.setString(3, txtNombreVJ.getText().trim());
-            pst.setString(4, txtClasiVJ.getText().trim());
-            pst.setString(5, txtTipoVJ.getText().trim());
-            pst.setString(6, txtExisVJ.getText().trim());
-            pst.setString(7, txtEstatusVJ.getText().trim());
+            pst.setString(1, txtCodigoVJ.getText().trim());
+            pst.setString(2, txtNombreVJ.getText().trim());
+            pst.setString(3, txtClasiVJ.getText().trim());
+            pst.setString(4, txtTipoVJ.getText().trim());
+            pst.setString(5, txtExisVJ.getText().trim());
+            pst.setString(6, txtEstatusVJ.getText().trim());
             pst.executeUpdate();
 
             label_status.setText("Modificación exitosa.");
-
+            {
+                JOptionPane.showMessageDialog(null, "VideoJuego Actualizado Exitosamente.");
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_modificarActionPerformed
@@ -281,20 +288,20 @@ public class MantenimientoVideoJ extends javax.swing.JInternalFrame {
         //Codigo que permite consultar registros en la base de datos
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/labfm", "root", "");
-            PreparedStatement pst = cn.prepareStatement("select * from clientes where ID = ?");
+            PreparedStatement pst = cn.prepareStatement("select * from videojuegos where ID = ?");
             pst.setString(1, txt_buscar.getText().trim());
 
             ResultSet rs = pst.executeQuery();
 
             if(rs.next()){
-                txtCodigoVJ.setText(rs.getString("CodigoEstudiante"));
-                txtNombreVJ.setText(rs.getString("NombreEstudiante"));
-                txtClasiVJ.setText(rs.getString("DireccionEstudiante"));
-                txtTipoVJ.setText(rs.getString("TelefonoEstudiante"));
-                txtExisVJ.setText(rs.getString("CorreoEstudiante"));
-                txtEstatusVJ.setText(rs.getString("EstatusEstudiante"));
+                txtCodigoVJ.setText(rs.getString("CodigoVideoJ"));
+                txtNombreVJ.setText(rs.getString("NombreVideoJ"));
+                txtClasiVJ.setText(rs.getString("ConsolaVideoJ"));
+                txtTipoVJ.setText(rs.getString("TipoVideoJ"));
+                txtExisVJ.setText(rs.getString("ExistenciaVideoJ"));
+                txtEstatusVJ.setText(rs.getString("EstatusVideoJ"));
             } else {
-                JOptionPane.showMessageDialog(null, "clientes no registrado.");
+                JOptionPane.showMessageDialog(null, "VideoJuego no Registrado.");
             }
 
         }catch (Exception e){
