@@ -16,6 +16,7 @@ public class FilmMagic extends javax.swing.JFrame {
 private MantenimientoCliente nuevaVentana1;
 private MantenimientoPeliculas nuevaVentana2;
 private MantenimientoVideoJ nuevaVentana3;
+private RegistroDevVencidas nuevaVentana4;
     /**
      * Creates new form FilmMagic
      */
@@ -38,20 +39,24 @@ private MantenimientoVideoJ nuevaVentana3;
         rC = new javax.swing.JMenuItem();
         rP = new javax.swing.JMenuItem();
         rVj = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 703, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Catalogo");
@@ -81,6 +86,18 @@ private MantenimientoVideoJ nuevaVentana3;
         jMenu1.add(rVj);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Proceso");
+
+        jMenuItem2.setText("Registro Devolucion Vencida");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Salir");
 
@@ -133,6 +150,11 @@ private MantenimientoVideoJ nuevaVentana3;
     dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    nuevaVentana4=new RegistroDevVencidas();
+    jDesktopPane1.add (nuevaVentana4);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,9 +193,11 @@ private MantenimientoVideoJ nuevaVentana3;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem rC;
     private javax.swing.JMenuItem rP;
     private javax.swing.JMenuItem rVj;
